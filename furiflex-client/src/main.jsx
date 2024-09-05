@@ -1,16 +1,8 @@
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {RouterProvider } from "react-router-dom";
 import "./index.css";
-import Root from "./Root/Root.jsx";
-import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
+import { router } from "./Routes/Routes";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage/>
-  },
-]);
 
 createRoot(document.getElementById("root")).render(
   <>
