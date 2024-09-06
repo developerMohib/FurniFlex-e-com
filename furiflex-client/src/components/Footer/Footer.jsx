@@ -3,118 +3,119 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
 import { SlSocialLinkedin } from "react-icons/sl";
 import logo from "../../assets/F.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="bg-secondary">
       <div className="px-4 sm:px-6 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto">
         <div className="p-5">
-          <h1 className="font-bold flex text-4xl items-center text-white">
+          <Link to="/" className="font-bold flex text-4xl items-center text-white">
             <img
-              className="bg-primary p-4 rounded-full mr-2"
+              className="bg-primary p-3 rounded-full mr-2"
               src={logo}
               alt="FurniFlex"
             />{" "}
             Furni<span className="text-primary">Flex</span>
-          </h1>
+          </Link>
         </div>
         <div className="p-5">
           <div className="text-sm uppercase text-white font-bold">About Us</div>
-          <a className="my-3 block text-ternary" href="/#">
+          <Link to="/" className="my-3 block text-ternary">
             Master Plan
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Jobs
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Invest
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Pressroom
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Blog
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Contact
-          </a>
+          </Link>
         </div>
         <div className="p-5">
           <div className="text-sm uppercase text-white font-bold">
             Explore EEVE
           </div>
-          <a className="my-3 block text-ternary" href="/#">
+          <Link className="my-3 block text-ternary" to="/#">
             Unlock my Robot Power
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Starlight
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Robot Platform
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             EEVE Roadmap
-          </a>
+          </Link>
         </div>
         <div className="p-5">
           <div className="text-sm uppercase text-white font-bold">
             Community & Support
           </div>
-          <a className="my-3 block text-ternary" href="/#">
+          <Link className="my-3 block text-ternary" to="/#">
             Willow X Community
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Developer & Maker Access
-          </a>
-          <a className="my-3 block text-ternary" href="/#">
+          </Link>
+          <Link className="my-3 block text-ternary" to="/#">
             Special Cases
-          </a>
+          </Link>
         </div>
       </div>
 
       <div className="text-center pt-5 border-t  border-primary">
         <div className="flex pb-5 px-8 m-auto text-gray-800 text-sm justify-stretch items-center">
           <div className="md:flex-auto mt-2 flex justify-start">
-            <a href="/#" className="mx-1">
+            <Link to="/#" className="mx-1">
               <FiFacebook className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <IoLogoInstagram className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <FaXTwitter className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <SlSocialLinkedin className="text-white text-base" />{" "}
-            </a>
+            </Link>
           </div>
           <div className="md:flex-auto mt-2 flex justify-center">
-            <a href="/#" className="mx-1">
+            <Link to="/#" className="mx-1">
               <FiFacebook className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <IoLogoInstagram className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <FaXTwitter className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <SlSocialLinkedin className="text-white text-base" />{" "}
-            </a>
+            </Link>
           </div>
           <div className="md:flex-auto mt-2 flex justify-end">
-            <a href="/#" className="mx-1">
+            <Link to="/#" className="mx-1">
               <FiFacebook className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <IoLogoInstagram className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <FaXTwitter className="text-white text-base" />{" "}
-            </a>
-            <a href="/#" className="mx-1">
+            </Link>
+            <Link to="/#" className="mx-1">
               <SlSocialLinkedin className="text-white text-base" />{" "}
-            </a>
+            </Link>
           </div>
         </div>
         <div className="py-5 text-ternary">

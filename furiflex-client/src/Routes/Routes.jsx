@@ -9,6 +9,7 @@ import Products from "../Pages/Products/Products";
 import Categories from "../Pages/Categories/Categories";
 import Custom from "../Pages/Custom/Custom";
 import Blog from "../Pages/Blog/Blog";
+import PdDetails from "../Pages/PdDetails/PdDetails";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
         {
           path: "/products",
           element: <Products />,
+        },
+        {
+          path: "/product-details/:id",
+          element: < PdDetails />,
         },
         {
           path: "/categories",
