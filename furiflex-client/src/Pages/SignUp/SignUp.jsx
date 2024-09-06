@@ -29,8 +29,8 @@ const SignUp = () => {
               {/* input field here */}
 
               <div className="mb-4 flex flex-col gap-6">
-                <div className="flex gap-4">
-                  <div className="relative h-11 w-full min-w-[200px]">
+                <div className="md:flex gap-4">
+                  <div className="relative h-11 w-full min-w-[200px] md:mb-0 mb-5">
                     <input
                       className="peer h-full w-full rounded-md border border-blue-gray-200 px-3 py-3 text-sm font-normal text-blue-gray-700 outline-none transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-1 focus:border-secondary focus:border-t-transparent focus:outline-none disabled:border-0 disabled:bg-blue-gray-50"
                       placeholder=" "
