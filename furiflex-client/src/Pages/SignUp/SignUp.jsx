@@ -1,4 +1,5 @@
 import bgImg from "../../assets/user-enter.png";
+import logo from "../../assets/F.png";
 const SignUp = () => {
   return (
     <div>
@@ -6,15 +7,18 @@ const SignUp = () => {
         <div className="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8">
           <div className="w-full px-8 md:px-32 lg:px-24">
             <form className="bg-white rounded-md shadow-2xl p-5">
+              <div className="text-center">
               <h1 className="text-gray-800 font-bold text-2xl mb-1">
-                Hello Again!
+                Welcome to
               </h1>
-              <p className="text-sm font-normal text-gray-600">
-                Welcome Back
+              <h1 className="font-bold text-4xl">
+                Furni<span className="text-[#1E99F5]">Flex</span>
+              </h1>
+              <p className="text-sm font-normal text-gray-600 mb-8">
+              Signup for purchase your desire products
               </p>
-              <h1 className="font-bold text-4xl mb-8">
-            Furni<span className="text-[#1E99F5]" >Flex</span>
-            </h1>
+              </div>
+
               <div className="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,22 +84,31 @@ const SignUp = () => {
           </div>
         </div>
 
-        <div style={{
-        backgroundImage: `linear-gradient(rgba(2,2,2,.1),rgba(0,0,0,.1)), url(${bgImg})`,
-        backgroundPosition: "center center",
-        backgroundSize: "cover",
-      }} className="hidden lg:flex w-full lg:w-1/2 justify-around items-center">          
+        <div
+          style={{
+            backgroundImage: `linear-gradient(rgba(2,2,2,.1),rgba(0,0,0,.1)), url(${bgImg})`,
+            backgroundPosition: "center center",
+            backgroundSize: "cover",
+          }}
+          className="hidden lg:flex w-full lg:w-1/2 justify-around items-center"
+        >
           <div className="w-full mx-auto px-14 flex items-center justify-center space-y-6 ">
             <div className="text-center w-4/5">
-            <div className=" bg-[#1E99F5] rounded-full">
-
-            <span className="text-white text-7xl p-5">F</span>
-            </div>
-            <h1 className="text-white font-bold text-4xl">
-            Furni<span className="text-[#1E99F5]" >Flex</span>
-            </h1>
-            <p className="text-white mt-1">Discover a seamless shopping experience with our curated collection of products. From fashion to electronics, we bring quality. </p>
-            
+              <div className=" text-center flex items-center justify-center">
+                <img
+                  className="bg-[#1E99F5] p-4 rounded-full"
+                  src={logo}
+                  alt=""
+                />
+              </div>
+              <h1 className="text-white font-bold text-4xl">
+                Furni<span className="text-[#1E99F5]">Flex</span>
+              </h1>
+              <p className="text-white mt-1">
+                Discover a seamless shopping experience with our curated
+                collection of products. From fashion to electronics, we bring
+                quality.{" "}
+              </p>
             </div>
           </div>
         </div>
