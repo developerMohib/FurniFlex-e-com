@@ -10,6 +10,10 @@ export default {
         paraFont: ['Inter', 'sans-serif'],
         headingFont: ['Barlow', 'sans-serif'],
       },
+      colors: {
+        primary: '#1E99F5', 
+        secondary: '#000000',
+      },
     },
   },
   plugins: [],
