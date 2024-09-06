@@ -1,9 +1,11 @@
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/F.png";
 import account from "../../assets/Account.png";
 import { useEffect, useState } from "react";
 import { TbShoppingBag } from "react-icons/tb";
+import { AiOutlineBars } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -42,19 +44,54 @@ const Navbar = () => {
   const navLinks = (
     <ul className="md:flex xl:gap-10 md:gap-5 gap-2">
       <li>
-        <Link to="/">Home</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active text-primary" : "hover:text-primary font-light"
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <Link to="/products">Products</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active text-primary" : "hover:text-primary font-light"
+          }
+          to="/products"
+        >
+          Products
+        </NavLink>
       </li>
       <li>
-        <Link to="/categories">Categories</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active text-primary" : "hover:text-primary font-light"
+          }
+          to="/categories"
+        >
+          Categories
+        </NavLink>
       </li>
       <li>
-        <Link to="/custom">Custom</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active text-primary" : "hover:text-primary font-light"
+          }
+          to="/custom"
+        >
+          Custom
+        </NavLink>
       </li>
       <li>
-        <Link to="/blog">Blog</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active text-primary" : "hover:text-primary font-light"
+          }
+          to="/blog"
+        >
+          Blog
+        </NavLink>
       </li>
     </ul>
   );
@@ -84,20 +121,11 @@ const Navbar = () => {
               id="open-sidebar"
               onClick={toggleSidebar}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
+              {isSidebarOpen ? (
+                <RxCross2 className="text-2xl" />
+              ) : (
+                <AiOutlineBars className="text-2xl" />
+              )}
             </button>
             <span>
               {" "}
