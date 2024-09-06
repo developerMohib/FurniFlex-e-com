@@ -19,7 +19,7 @@ const SignUp = () => {
                   Welcome to
                 </h1>
                 <h1 className="font-bold text-4xl">
-                  Furni<span className="text-[#1E99F5]">Flex</span>
+                  Furni<span className="text-primary">Flex</span>
                 </h1>
                 <p className="text-sm font-normal text-gray-600 mb-8">
                   Signup for purchase your desire products
@@ -177,7 +177,7 @@ const SignUp = () => {
                 <img
                   className="bg-primary p-4 rounded-full"
                   src={logo}
-                  alt=""
+                  alt="FurniFlex"
                 />
               </div>
               <h1 className="text-white font-bold text-4xl">
