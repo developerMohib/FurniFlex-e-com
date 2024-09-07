@@ -127,10 +127,10 @@ const Navbar = () => {
                 <AiOutlineBars className="text-2xl" />
               )}
             </button>
-            <span>
+            <Link to="/cart">
               {" "}
               <TbShoppingBag className="text-2xl" />{" "}
-            </span>
+            </Link>
             <span>
               {" "}
               <img src={account} alt="login user" />{" "}

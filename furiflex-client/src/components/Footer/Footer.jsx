@@ -10,7 +10,10 @@ const Footer = () => {
     <div className="bg-secondary">
       <div className="px-4 sm:px-6 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto">
         <div className="p-5">
-          <Link to="/" className="font-bold flex text-4xl items-center text-white">
+          <Link
+            to="/"
+            className="font-bold flex text-4xl items-center text-white"
+          >
             <img
               className="bg-primary p-3 rounded-full mr-2"
               src={logo}

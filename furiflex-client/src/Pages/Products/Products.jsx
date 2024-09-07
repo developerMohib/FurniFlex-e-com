@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import chair from "../../assets/Blank-bamboo.png";
 
 const Products = () => {
-    const id = 3;
+  const id = 3;
   return (
     <div className="flex">
       {/* Category Menu */}

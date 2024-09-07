@@ -26,7 +26,7 @@ const SignIn = () => {
               {/* input field here */}
 
               <div className="flex flex-col gap-6">
-                             {/* Email input */}
+                {/* Email input */}
                 <div className="relative h-11 w-full min-w-[200px]">
                   <input
                     className="peer h-full w-full rounded-md border border-blue-gray-200 px-3 py-3 text-sm font-normal text-blue-gray-700 outline-none transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-1 focus:border-secondary  focus:border-t-transparent focus:outline-none disabled:border-0 disabled:bg-blue-gray-50"
@@ -62,7 +62,7 @@ const SignIn = () => {
                   </span>
                 </div>
                 <Link className="text-sm flex justify-end text-primary underline">
-                 Forget Password
+                  Forget Password
                 </Link>
               </div>
               <div className="inline-flex items-center">

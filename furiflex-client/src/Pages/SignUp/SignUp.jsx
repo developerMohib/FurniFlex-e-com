@@ -6,40 +6,43 @@ import google from "../../assets/google.png";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import bgImg from "../../assets/user-enter.png";
 import useAuth from "../../Hooks/useAuth";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [showPass, setShowPass] = useState(false);
   const { createUser } = useAuth();
 
-const handleSubmit = async (e) =>{
-  e.preventDefault();
-  const form = e.target;
-  
-  // Collecting values from the form
-  const name = form.firstName.value;
-  const email = form.email.value;
-  const password = form.password.value;
-  console.log('from', name, email,password );
-  form.reset();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
 
-  // create user
-  await createUser(email, password);
-  Swal.fire({
-    position: "top-end",
-    icon: "success",
-    title: "Your work has been saved",
-    showConfirmButton: false,
-    timer: 1500
-  });
-}
+    // Collecting values from the form
+    const name = form.firstName.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log("from", name, email, password);
+    form.reset();
+
+    // create user
+    await createUser(email, password);
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   return (
     <div>
       <div className="h-screen flex">
         <div className="flex w-full lg:w-1/2 justify-center items-center space-y-8">
           <div className="w-full px-8 md:px-32 lg:px-24 ">
-            <form onSubmit={handleSubmit} className="bg-gray-100 rounded-md p-5">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-gray-100 rounded-md p-5"
+            >
               <div className="text-center">
                 <h1 className="text-gray-800 font-semibold text-xl mb-1">
                   Welcome to
@@ -108,8 +111,11 @@ const handleSubmit = async (e) =>{
                     onClick={() => setShowPass(!showPass)}
                     className="absolute right-3 top-3 cursor-pointer  "
                   >
-                    {showPass ? <IoEyeOffOutline className="text-2xl" /> : <IoEyeOutline className="text-2xl" />}
-                     {" "}
+                    {showPass ? (
+                      <IoEyeOffOutline className="text-2xl" />
+                    ) : (
+                      <IoEyeOutline className="text-2xl" />
+                    )}{" "}
                   </span>
                 </div>
               </div>

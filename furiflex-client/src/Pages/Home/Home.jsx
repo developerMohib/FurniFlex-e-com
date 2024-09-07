@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import chair from "../../assets/Blank-bamboo.png";
+import useProducts from "../../Hooks/useProducts";
 const Home = () => {
-  // const res = fetch('/produts.json')
+  const { data } = useProducts();
+  console.log("data", data);
   const id = 2;
 
   return (
@@ -41,164 +42,30 @@ const Home = () => {
       <div className="w-3/4 p-4 overflow-y-scroll nos h-screen">
         <div className="grid grid-cols-3 gap-6">
           {/* Single Product Card */}
-          <div className="border p-4 rounded-lg shadow">
-            <Link to={`/product-details/${id}`}>
-              <img
-                src={chair}
-                alt="Recliner Chair Wood"
-                className="w-full h-40 object-cover mb-4 hover:scale-105 duration-300 transition-all"
-              />
-              <h3 className="text-lg font-semibold">Recliner Chair Wood</h3>
-            </Link>
-            <div className="flex justify-between items-center">
-              <p className="text-xl font-bold text-red-500">€299.00</p>
-              <p className="text-gray-600 line-through">€350.00</p>
-              <p className="text-sm text-green-500">30% OFF</p>
+
+          {data?.map((item, idx) => (
+            <div key={idx} className="border p-4 rounded-lg shadow">
+              <Link to={`/product-details/${id}`}>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-40 object-cover mb-4 hover:scale-105 duration-300 transition-all"
+                />
+                <h3 className="text-base my-2 font-semibold"> {item.name} </h3>
+              </Link>
+              <div className="flex justify-between items-center">
+                <p className="text-xl font-bold text-red-500">€{item.price} </p>
+                <p className="text-gray-600 line-through">
+                  €{item.original_price}
+                </p>
+                <p className="text-sm text-green-500">{item.discount}</p>
+              </div>
+              <p className="text-gray-400 text-sm my-2">{item.description}</p>
+              <button className="mt-4 bg-black text-white py-2 px-4 w-full rounded">
+                Add to cart
+              </button>
             </div>
-            <p className="text-gray-400 text-sm ">
-              It has a backrest that can be tilted back, and often a footrest
-              extended
-            </p>
-            <button className="mt-4 bg-black text-white py-2 px-4 w-full rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Repeat for other products */}
-          <div className="border p-4 rounded-lg shadow">
-            <img
-              src={chair}
-              alt="Timber Ride Padded"
-              className="w-full h-40 object-cover mb-4"
-            />
-            <h3 className="text-lg font-semibold">Timber Ride Padded</h3>
-            <p className="text-gray-600 line-through">€75.00</p>
-            <p className="text-xl font-bold text-red-500">€59.00</p>
-            <p className="text-sm text-green-500">30% OFF</p>
-            <button className="mt-4 bg-black text-white py-2 px-4 rounded">
-              Add to cart
-            </button>
-          </div>
-          {/* Add more products as needed */}
+          ))}
         </div>
       </div>
     </div>
