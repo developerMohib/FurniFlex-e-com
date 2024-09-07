@@ -1,57 +1,50 @@
 import { useState } from "react";
-import chair from "../../assets/Isolated-wooden.png";
 import useCartData from "../../Hooks/useCartData";
 import { RxCross1 } from "react-icons/rx"
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const {cart, refetch} = useCartData();
+  console.log('carty ', cart)
+  const axiosPublic = useAxiosPublic();
   console.log('cart data', cart)
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      console.log(result)
+      if (result.isConfirmed) {
+        axiosPublic.delete(`/carts/${id}`).then((res) => {
+          refetch();
+          if (res.data.deletedCount > 0) {
+            //
+          }
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        });
+      }
+    });
+  };
 
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Recliner Chair Steel",
-      price: 299.0,
-      quantity: 1,
-      image: "recliner-chair-steel.jpg",
-    },
-    {
-      id: 2,
-      name: "Gaming Chair",
-      price: 249.0,
-      quantity: 1,
-      image: "gaming-chair.jpg",
-    },
-    {
-      id: 3,
-      name: "Timber Ride Padded",
-      price: 59.0,
-      quantity: 1,
-      image: "timber-ride-padded.jpg",
-    },
-    {
-      id: 4,
-      name: "Isolated Wooden Rock",
-      price: 165.0,
-      quantity: 1,
-      image: "isolated-wooden-rock.jpg",
-    },
-    {
-      id: 5,
-      name: "Colored Wooden Chair",
-      price: 299.0,
-      quantity: 1,
-      image: "colored-wooden-chair.jpg",
-    },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
 
   const handleRemoveItem = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+    setCartItems(cart.filter((item) => item.id !== id));
   };
 
   const handleIncrementQuantity = (id) => {
     setCartItems(
-      cartItems.map((item) =>
+      cart.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
@@ -59,7 +52,7 @@ const Cart = () => {
 
   const handleDecrementQuantity = (id) => {
     setCartItems(
-      cartItems.map((item) =>
+      cart.map((item) =>
         item.id === id && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item
@@ -67,7 +60,7 @@ const Cart = () => {
     );
   };
 
-  const subtotal = cartItems.reduce(
+  const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
@@ -85,7 +78,7 @@ const Cart = () => {
         <div className="bg-gray-50 rounded-lg shadow-md">
           {cart?.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="flex items-center justify-between p-4 border-b border-gray-200"
             >
               <div className="flex items-center space-x-4">
@@ -93,20 +86,20 @@ const Cart = () => {
                   <div className="flex items-center space-x-2">
                     <button
                       className="bg-gray-200 px-2 py-1 rounded"
-                      onClick={() => handleDecrementQuantity(item.id)}
+                      onClick={() => handleDecrementQuantity(item._id)}
                     >
                       -
                     </button>
                     <span>{item.quantity}</span>
                     <button
                       className="bg-gray-200 px-2 py-1 rounded"
-                      onClick={() => handleIncrementQuantity(item.id)}
+                      onClick={() => handleIncrementQuantity(item._id)}
                     >
                       +
                     </button>
                   </div>{" "}
                   <img
-                    src={chair}
+                    src={item.image}
                     alt={item.name}
                     className="w-16 h-16 rounded-md bg-gray-100"
                   />
@@ -119,7 +112,7 @@ const Cart = () => {
                 <div>
                   <button
                     className="text-red-500 hover:text-red-700"
-                    onClick={() => handleRemoveItem(item.id)}
+                    onClick={() => handleDelete(item._id)}
                   >
                     <RxCross1 className="text-2xl" />
                   </button>
