@@ -1,33 +1,23 @@
-import { useEffect, useState } from "react";
-import Loader from "../components/Loader/Loader";
+import {
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
+import useAxiosPublic from "./useAxiosPublic";
 
 const useProducts = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient()
+  const axiosPublic = useAxiosPublic()
 
   // fetching data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/products.json");
-        if (!response.ok) {
-          throw new Error("Network response was not ok.");
-        }
-        const data = await response.json();
-        setData(data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  const { data: products = [], isLoading, refetch } = useQuery({
+    queryKey: ["product"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/products");
+      return res.data;
+    },
+  });
+  return { products, isLoading, refetch };
 
-  if (loading) {
-    return <Loader />;
-  }
-  return { data };
 };
 
 export default useProducts;

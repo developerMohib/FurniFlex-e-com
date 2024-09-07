@@ -32,7 +32,7 @@ async function run() {
     // all data get
     app.get('/products', async (req,res)=>{
       try {
-        const products = await productsCol.toArray();
+        const products = await productsCol.find().toArray();
         res.send(products)
         
       } catch (error) {

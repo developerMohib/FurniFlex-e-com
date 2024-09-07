@@ -156,9 +156,10 @@ const Navbar = () => {
               )}
             </button>
             <div className="flex items-center gap-3 ">
-              <Link to="/cart">
+              <Link className="relative " to="/cart">
                 {" "}
-                <TbShoppingBag className="text-2xl" />{" "}
+                <TbShoppingBag className="text-4xl" />
+                <span className="absolute right-0 -bottom-1 bg-gray-500 text-white px-1 text-sm rounded-full " > 9 </span>
               </Link>
               <span>
                 {user ? (
