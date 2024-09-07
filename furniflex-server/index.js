@@ -28,6 +28,7 @@ async function run() {
 
     const database = client.db("FurniFlex");
     const productsCol = database.collection("products");
+    const cartCollection = database.collection("cartsData");
 
     // all data get
     app.get('/products', async (req,res)=>{
@@ -43,6 +44,22 @@ async function run() {
         });
       }
     })
+
+     // carts collection data
+     app.get("/carts", async (req, res) => {
+      const email = req?.query.email;
+      const query = { email: email };
+      const cursor = cartCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+        
+    // cart collection data post
+    app.post("/carts", async (req, res) => {
+      const cartItem = req.body;
+      const result = await cartCollection.insertOne(cartItem);
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

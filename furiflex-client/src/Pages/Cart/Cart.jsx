@@ -1,47 +1,11 @@
 import { useState } from "react";
 import chair from "../../assets/Isolated-wooden.png";
-import useProducts from "../../Hooks/useProducts";
+import useCartData from "../../Hooks/useCartData";
+import { RxCross1 } from "react-icons/rx"
 
 const Cart = () => {
-  const {data} = useProducts()
-
-  const pData = [
-    {
-      id: 1,
-      name: "Recliner Chair Steel",
-      price: 299.0,
-      quantity: 1,
-      image: "recliner-chair-steel.jpg",
-    },
-    {
-      id: 2,
-      name: "Gaming Chair",
-      price: 249.0,
-      quantity: 1,
-      image: "gaming-chair.jpg",
-    },
-    {
-      id: 3,
-      name: "Timber Ride Padded",
-      price: 59.0,
-      quantity: 1,
-      image: "timber-ride-padded.jpg",
-    },
-    {
-      id: 4,
-      name: "Isolated Wooden Rock",
-      price: 165.0,
-      quantity: 1,
-      image: "isolated-wooden-rock.jpg",
-    },
-    {
-      id: 5,
-      name: "Colored Wooden Chair",
-      price: 299.0,
-      quantity: 1,
-      image: "colored-wooden-chair.jpg",
-    },
-  ]
+  const {cart, refetch} = useCartData();
+  console.log('cart data', cart)
 
   const [cartItems, setCartItems] = useState([
     {
@@ -119,7 +83,7 @@ const Cart = () => {
           An overview of your order
         </h2>
         <div className="bg-gray-50 rounded-lg shadow-md">
-          {pData?.map((item) => (
+          {cart?.map((item) => (
             <div
               key={item.id}
               className="flex items-center justify-between p-4 border-b border-gray-200"
@@ -157,7 +121,7 @@ const Cart = () => {
                     className="text-red-500 hover:text-red-700"
                     onClick={() => handleRemoveItem(item.id)}
                   >
-                    &times;
+                    <RxCross1 className="text-2xl" />
                   </button>
                 </div>
                 <div>

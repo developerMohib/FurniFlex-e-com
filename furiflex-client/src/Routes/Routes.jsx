@@ -11,6 +11,7 @@ import Custom from "../Pages/Custom/Custom";
 import Blog from "../Pages/Blog/Blog";
 import PdDetails from "../Pages/PdDetails/PdDetails";
 import Cart from "../Pages/Cart/Cart";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: <PrivateRoutes> <Cart /> </PrivateRoutes> ,
       },
       {
         path: "/terms-policy",

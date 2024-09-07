@@ -9,9 +9,11 @@ import { RxCross2 } from "react-icons/rx";
 import useAuth from "../../Hooks/useAuth";
 import { IoLogInOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
+import useCartData from "../../Hooks/useCartData";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const {cart} = useCartData();
   const [isSticky, setIsSticky] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -159,7 +161,7 @@ const Navbar = () => {
               <Link className="relative " to="/cart">
                 {" "}
                 <TbShoppingBag className="text-4xl" />
-                <span className="absolute right-0 -bottom-1 bg-gray-500 text-white px-1 text-sm rounded-full " > 9 </span>
+                <span className="absolute right-0 -bottom-1 bg-gray-500 text-white px-1 text-sm rounded-full " > {cart?.length} </span>
               </Link>
               <span>
                 {user ? (
