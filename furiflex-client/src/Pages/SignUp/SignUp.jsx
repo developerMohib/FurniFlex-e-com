@@ -1,6 +1,6 @@
 import { useState } from "react";
 import logo from "../../assets/F.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import apple from "../../assets/apple.png";
 import google from "../../assets/google.png";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
@@ -9,30 +9,53 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { createUser,loginWithGoogle } = useAuth();
   const [showPass, setShowPass] = useState(false);
-  const { createUser } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
     // Collecting values from the form
-    const name = form.firstName.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log("from", name, email, password);
     form.reset();
 
     // create user
     await createUser(email, password);
     Swal.fire({
-      position: "top-end",
+      position: "center",
       icon: "success",
-      title: "Your work has been saved",
+      title: "You have sign up succesfully",
       showConfirmButton: false,
       timer: 1500,
     });
+    navigate('/')
   };
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+    .then((result) => {
+      console.log(result.user);
+      navigate( location.state ? location.state : '/')
+      Swal.fire({
+        icon: 'success',
+        title: "success!",
+        text: 'You have logged in successfully!.'
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  const handleAppleLogin = () =>{
+    Swal.fire({
+      icon: 'error',
+      title: "warning!",
+      text: 'Not work yet. Comming soon'
+    });
+  }
 
   return (
     <div>
@@ -174,11 +197,11 @@ const SignUp = () => {
               </div>
 
               <div className="flex justify-between mt-4">
-                <button className="text-sm ml-2 flex items-center hover:text-blue-500 border border-slate-500 p-2 hover:-translate-y-1 duration-500 transition-all">
+                <button onClick={handleGoogleLogin} className="text-sm ml-2 flex items-center hover:text-blue-500 border border-slate-500 p-2 hover:-translate-y-1 duration-500 transition-all">
                   <img className="mr-2" src={google} alt="" /> Sign in with
                   Google
                 </button>
-                <button className="text-sm ml-2 flex items-center hover:text-blue-500 border border-slate-500 p-2 hover:-translate-y-1 duration-500 transition-all">
+                <button onClick={handleAppleLogin} className="text-sm ml-2 flex items-center hover:text-blue-500 border border-slate-500 p-2 hover:-translate-y-1 duration-500 transition-all">
                   <img className="mr-2" src={apple} alt="" /> Sign in with Apple
                 </button>
               </div>

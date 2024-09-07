@@ -6,8 +6,12 @@ import { useEffect, useState } from "react";
 import { TbShoppingBag } from "react-icons/tb";
 import { AiOutlineBars } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
+import useAuth from "../../Hooks/useAuth";
+import { IoLogInOutline } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
   const [isSticky, setIsSticky] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -40,6 +44,30 @@ const Navbar = () => {
       document.removeEventListener("click", closeSidebar);
     };
   }, []);
+
+  const handleLogOut = async () => {
+    try {
+      await logOut();  
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "You have logged out successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error("Logout failed:", error);
+  
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Logout failed",
+        text: "An error occurred while logging out. Please try again.",
+        showConfirmButton: true,
+      });
+    }
+  };
+  
 
   const navLinks = (
     <ul className="md:flex xl:gap-10 md:gap-5 gap-2">
@@ -127,14 +155,31 @@ const Navbar = () => {
                 <AiOutlineBars className="text-2xl" />
               )}
             </button>
-            <Link to="/cart">
-              {" "}
-              <TbShoppingBag className="text-2xl" />{" "}
-            </Link>
-            <span>
-              {" "}
-              <img src={account} alt="login user" />{" "}
-            </span>
+            <div className="flex items-center gap-3 ">
+              <Link to="/cart">
+                {" "}
+                <TbShoppingBag className="text-2xl" />{" "}
+              </Link>
+              <span>
+                {user ? (
+                  <div className="flex items-center gap-2">
+                    <img title={user?.email} src={account} alt="login user" />{" "}
+                    <IoLogInOutline
+                      onClick={handleLogOut}
+                      title="Log out"
+                      className="text-2xl cursor-pointer"
+                    />{" "}
+                  </div>
+                ) : (
+                  <Link to="/sign-in">
+                    {" "}
+                    <button className="btn p-4 border rounded-lg">
+                      Login{" "}
+                    </button>
+                  </Link>
+                )}
+              </span>
+            </div>
           </div>
         </div>
 

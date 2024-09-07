@@ -42,8 +42,7 @@ const Home = () => {
       <div className="w-3/4 p-4 overflow-y-scroll nos h-screen">
         <div className="grid grid-cols-3 gap-6">
           {/* Single Product Card */}
-
-          {data?.map((item, idx) => (
+          {data?.slice(0,6).map((item, idx) => (
             <div key={idx} className="border p-4 rounded-lg shadow">
               <Link to={`/product-details/${id}`}>
                 <img
@@ -66,6 +65,9 @@ const Home = () => {
               </button>
             </div>
           ))}
+        </div>
+        <div className="text-center my-10">
+        <button>Pagination</button>
         </div>
       </div>
     </div>
