@@ -7,6 +7,7 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import bgImg from "../../assets/user-enter.png";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import Heading from "../../components/Heading/Heading";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -62,6 +63,7 @@ const SignIn = () => {
 
   return (
     <div>
+      <Heading routeName={"Log in"} />
       <div className="h-screen flex">
         <div className="flex w-full lg:w-1/2 justify-center items-center space-y-8">
           <div className="w-full px-8 md:px-32 lg:px-24 ">

@@ -3,6 +3,7 @@ import useCartData from "../../Hooks/useCartData";
 import { RxCross1 } from "react-icons/rx"
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import Heading from "../../components/Heading/Heading";
 
 const Cart = () => {
   const {cart, refetch} = useCartData();
@@ -63,6 +64,8 @@ const Cart = () => {
   };
 
   return (
+    <>
+    <Heading routeName={"Cart"} />
     <div className="container mx-auto p-4 md:flex md:space-x-4">
       <div className="md:w-2/3">
         <h2 className="text-xl font-semibold mb-4">
@@ -150,6 +153,7 @@ const Cart = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

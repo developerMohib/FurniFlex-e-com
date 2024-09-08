@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
+import Heading from "../../components/Heading/Heading";
 
 
 const Products = () => {
@@ -87,6 +88,7 @@ const Products = () => {
   
   return (
     <div className="flex">
+    <Heading routeName={"Product"} />
       {/* Category Menu */}
       <div className="w-1/4 h-screen bg-gray-100 p-4 sticky top-0">
         <h2 className="text-xl font-bold mb-4">Categories</h2>

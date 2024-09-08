@@ -1,5 +1,9 @@
+import Heading from "../../components/Heading/Heading";
+
 const Blog = () => {
   return (
+    <>
+    <Heading routeName={"Blog"} />
     <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
       <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-10">
         <div className="border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
@@ -151,6 +155,7 @@ const Blog = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

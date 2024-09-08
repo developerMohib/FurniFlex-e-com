@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useCartData from "../../Hooks/useCartData";
 import MyPagination from "../../components/MyPagination/MyPagination";
+import Heading from "../../components/Heading/Heading";
 
 const Home = () => {
   const { user } = useAuth();
@@ -116,6 +117,8 @@ const Home = () => {
   if (isLoading) return <Loader />;
 
   return (
+    <>
+    <Heading routeName={"Home"} />
     <div className="flex">
       {/* Category Menu */}
       <div className="w-1/4 h-screen bg-gray-100 p-4 sticky top-0">
@@ -178,6 +181,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

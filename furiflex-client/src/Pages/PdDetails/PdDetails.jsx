@@ -3,6 +3,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import Heading from "../../components/Heading/Heading";
 
 const PdDetails = () => {
   const product = useLoaderData();
@@ -19,7 +20,7 @@ const PdDetails = () => {
   const { refetch } = useCartData();
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const email = user?.email;
   const handleAddCart = (image, name, price) => {
@@ -43,7 +44,7 @@ const PdDetails = () => {
           });
         }
         refetch();
-        navigate('/cart')
+        navigate("/cart");
       })
       .catch((err) => {
         console.log(err);
@@ -52,6 +53,7 @@ const PdDetails = () => {
 
   return (
     <div className="bg-gray-100">
+      <Heading routeName={"Product Details"} />
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap -mx-4">
           {/* Product Images */}
