@@ -12,6 +12,7 @@ import Blog from "../Pages/Blog/Blog";
 import PdDetails from "../Pages/PdDetails/PdDetails";
 import Cart from "../Pages/Cart/Cart";
 import PrivateRoutes from "./PrivateRoutes";
+import SingleProduct from "../components/SingleProduct/SingleProduct";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
       {
         path: "/product-details/:id",
         element: <PdDetails />,
+        loader : SingleProduct ,
       },
       {
         path: "/categories",

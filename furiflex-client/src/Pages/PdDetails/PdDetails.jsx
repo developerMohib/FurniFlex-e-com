@@ -1,46 +1,54 @@
-import { useState } from "react";
 import useCartData from "../../Hooks/useCartData";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const PdDetails = () => {
+  const product = useLoaderData();
+  const {
+    category,
+    description,
+    discount,
+    image,
+    name,
+    original_price,
+    price,
+  } = product;
 
-  
-  const {refetch} = useCartData();
+  const { refetch } = useCartData();
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
+  const navigate = useNavigate()
 
-  const email = user?.email ;
-const handleAddCart = (image, name, price) => {
-  const cartItem = {
-    name,
-    image,
-    price,
-    email,
+  const email = user?.email;
+  const handleAddCart = (image, name, price) => {
+    const cartItem = {
+      name,
+      image,
+      price,
+      email,
+    };
+
+    axiosPublic
+      .post("/carts", cartItem)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `${name} added to your cart`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        refetch();
+        navigate('/cart')
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
-  // axiosPublic
-  // .post("/carts", cartItem)
-  // .then((res) => {
-  //   if (res.data.insertedId) {
-  //     Swal.fire({
-  //       position: "center",
-  //       icon: "success",
-  //       title: `${name} added to your cart`,
-  //       showConfirmButton: false,
-  //       timer: 1500,
-  //     });
-  //   }
-  //   refetch();
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  // });
-};
-
-  const mainImage= "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080";
 
   return (
     <div className="bg-gray-100">
@@ -49,7 +57,7 @@ const handleAddCart = (image, name, price) => {
           {/* Product Images */}
           <div className="w-full md:w-1/2 px-4 mb-8">
             <img
-              src={mainImage}
+              src={image}
               alt="Product"
               className="w-full h-auto rounded-lg shadow-md mb-4"
               id="mainImage"
@@ -58,13 +66,15 @@ const handleAddCart = (image, name, price) => {
 
           {/* Product Details */}
           <div className="w-full md:w-1/2 px-4">
-            <h2 className="text-3xl font-bold mb-2">
-              Premium Wireless Headphones
-            </h2>
+            <small> category : {category} </small>
+            <h2 className="text-3xl font-bold mb-2">{name}</h2>
             <p className="text-gray-600 mb-4">SKU: WH1000XM4</p>
             <div className="mb-4">
-              <span className="text-2xl font-bold mr-2">$349.99</span>
-              <span className="text-gray-500 line-through">$399.99</span>
+              <span className="text-2xl font-bold mr-2">${price} </span>
+              <span className="text-gray-500 mx-2 line-through">
+                ${original_price}
+              </span>
+              <small className="text-red-600"> {discount} </small>
             </div>
             <div className="flex items-center mb-4">
               {[...Array(5)].map((_, i) => (
@@ -86,11 +96,7 @@ const handleAddCart = (image, name, price) => {
               ))}
               <span className="ml-2 text-gray-600">4.5 (120 reviews)</span>
             </div>
-            <p className="text-gray-700 mb-6">
-              Experience premium sound quality and industry-leading noise
-              cancellation with these wireless headphones. Perfect for music
-              lovers and frequent travelers.
-            </p>
+            <p className="text-gray-700 mb-6">{description}</p>
 
             <div className="mb-6">
               <h3 className="text-lg font-semibold mb-2">Color:</h3>
@@ -111,7 +117,10 @@ const handleAddCart = (image, name, price) => {
               />
             </div>
 
-            <button onClick={()=>handleAddCart()} className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">
+            <button
+              onClick={() => handleAddCart()}
+              className="w-full bg-secondary text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300"
+            >
               Add to Cart
             </button>
           </div>

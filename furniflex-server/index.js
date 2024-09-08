@@ -52,6 +52,24 @@ async function run() {
       }
     });
 
+    // signle products get
+    app.get('/product-details/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id)};
+      try {
+        const result = await productsCol.findOne(query);
+        if (result) {
+          res.send(result);
+        } else {
+          res.status(404).send({ message: "Product not found" });
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+        res.status(500).send({ message: "Internal Server Error" });
+      }
+    });
+    
+
     // carts collection data
     app.get("/carts", async (req, res) => {
       const email = req?.query.email;

@@ -14,7 +14,7 @@
 
 ## How to run 
 ``` bash 
-git clone : 
+git clone : https://github.com/developerMohib/FurniFlex-e-com.git
 ```
 ```
 - For all dependencies

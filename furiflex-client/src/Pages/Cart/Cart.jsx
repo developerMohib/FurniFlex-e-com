@@ -6,9 +6,7 @@ import Swal from "sweetalert2";
 
 const Cart = () => {
   const {cart, refetch} = useCartData();
-  console.log('carty ', cart)
   const axiosPublic = useAxiosPublic();
-  console.log('cart data', cart)
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -19,7 +17,6 @@ const Cart = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
-      console.log(result)
       if (result.isConfirmed) {
         axiosPublic.delete(`/carts/${id}`).then((res) => {
           refetch();
@@ -37,10 +34,6 @@ const Cart = () => {
   };
 
   const [cartItems, setCartItems] = useState([]);
-
-  const handleRemoveItem = (id) => {
-    setCartItems(cart.filter((item) => item.id !== id));
-  };
 
   const handleIncrementQuantity = (id) => {
     setCartItems(
@@ -119,7 +112,7 @@ const Cart = () => {
                 </div>
                 <div>
                   <p className="text-sm text-secondary font-semibold">
-                    €{item.price.toFixed(2)}
+                    €{item.price}
                   </p>
                 </div>
               </div>
@@ -133,7 +126,7 @@ const Cart = () => {
           <div className="mt-4">
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
-              <span>€{subtotal.toFixed(2)}</span>
+              <span>€{subtotal}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>Shipping</span>
@@ -145,7 +138,7 @@ const Cart = () => {
             </div>
             <div className="flex justify-between mt-4 font-semibold text-lg">
               <span>Total</span>
-              <span>€{subtotal.toFixed(2)}</span>
+              <span>€{subtotal}</span>
             </div>
             <button
               className="bg-black text-white w-full py-3 mt-6 rounded"
