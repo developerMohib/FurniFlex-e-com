@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 8000;
-const { MongoClient, ServerApiVersion,ObjectId } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 // middle-wares
 app.use(cors());
@@ -32,7 +32,16 @@ async function run() {
     // all data get
     app.get("/products", async (req, res) => {
       try {
-        const products = await productsCol.find().toArray();
+        const page = parseInt(req.query.page) || 1;
+        const pageSize = 6;
+        const skip = (page - 1) * pageSize;
+
+        const products = await productsCol.find()
+        .skip(skip)
+        .limit(pageSize)
+        .toArray();
+      
+
         res.send(products);
       } catch (error) {
         res.status(500).send({
@@ -85,11 +94,24 @@ async function run() {
       }
     });
 
+    // Route to get the total product count
+    app.get("/productCount", async (req, res) => {
+      try {
+        const count = await productsCol.estimatedDocumentCount();
+        res.send({ count });
+      } catch (error) {
+        res.status(500).send({
+          success: false,
+          message: "Failed to retrieve product count",
+          error: error.message,
+        });
+      }
+    });
+
     // delete from cart
     app.delete("/carts/:id", async (req, res) => {
       const id = req.params.id;
-      console.log('id', id)
-      const query = { _id: new ObjectId (id) };
+      const query = { _id: new ObjectId(id) };
 
       try {
         const result = await cartCollection.deleteOne(query);

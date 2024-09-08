@@ -161,7 +161,7 @@ const Navbar = () => {
               <Link className="relative " to="/cart">
                 {" "}
                 <TbShoppingBag className="text-4xl" />
-                <span className="absolute right-0 -bottom-1 bg-gray-500 text-white px-1 text-sm rounded-full " > {cart?.length} </span>
+                <span className="absolute right-0 -bottom-1 bg-secondary text-white px-1 text-sm rounded-full " > {cart?.length} </span>
               </Link>
               <span>
                 {user ? (

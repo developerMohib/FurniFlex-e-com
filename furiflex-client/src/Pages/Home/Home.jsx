@@ -2,21 +2,26 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Loader from "../../components/Loader/Loader";
 import useProducts from "../../Hooks/useProducts";
 import useAuth from "../../Hooks/useAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useCartData from "../../Hooks/useCartData";
+import MyPagination from "../../components/MyPagination/MyPagination";
 
 const Home = () => {
-  const { products, isLoading } = useProducts();
-  const { cart, refetch: refetchCart } = useCartData(); // Fetch cart data
-  const [filteredData, setFilteredData] = useState([]);
-  const axiosPublic = useAxiosPublic();
-  const navigate = useNavigate();
   const { user } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const axiosPublic = useAxiosPublic();
+  const { products, isLoading } = useProducts(page);
+  const [filteredData, setFilteredData] = useState([]);
+  const { cart, refetch: refetchCart } = useCartData();
   
-  console.log("Filtered Category:", cart);
+   // Trigger any side-effects when `page` changes
+   useEffect(() => {
+    // This effect will trigger a re-fetch in `useProducts`
+  }, [page]);
   
   // Creating a unique list of categories
   const categoryArray = Array.from(new Set(products?.map((product) => product.category)));
@@ -87,7 +92,7 @@ const Home = () => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, log in!",
+        confirmButtonText: "Yes, log in !",
       }).then((result) => {
         if (result.isConfirmed) {
           navigate("/sign-in", { state: { from: location }, replace: true });
@@ -101,6 +106,11 @@ const Home = () => {
     const filterData = products?.filter((item) => item.category === category);
     setFilteredData(filterData);
   };
+  // Handle updating the page state
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+  console.log('currentPage ', page)
 
   // Show a loading state while products are being fetched
   if (isLoading) return <Loader />;
@@ -127,7 +137,7 @@ const Home = () => {
       <div className="w-3/4 p-4 overflow-y-scroll nos h-screen">
         <div className="grid grid-cols-3 gap-6">
           {/* Display filtered products if a category is selected, otherwise show all products */}
-          {(filteredData.length > 0 ? filteredData : products)?.slice(0, 6).map((item, idx) => (
+          {(filteredData.length > 0 ? filteredData : products)?.map((item, idx) => (
             <div key={idx} className="border p-4 rounded-lg shadow">
               <Link to={`/product-details/${item._id}`}>
                 <img
@@ -153,7 +163,7 @@ const Home = () => {
           ))}
         </div>
         <div className="text-center my-10">
-          <button>Pagination</button>
+          <MyPagination currentPage={page} handlePageChange={handlePageChange} />
         </div>
       </div>
     </div>
