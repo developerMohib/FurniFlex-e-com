@@ -12,8 +12,8 @@ import Swal from "sweetalert2";
 import useCartData from "../../Hooks/useCartData";
 
 const Navbar = () => {
+  const { cart } = useCartData();
   const { user, logOut } = useAuth();
-  const {cart} = useCartData();
   const [isSticky, setIsSticky] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -49,7 +49,7 @@ const Navbar = () => {
 
   const handleLogOut = async () => {
     try {
-      await logOut();  
+      await logOut();
       Swal.fire({
         position: "center",
         icon: "success",
@@ -59,7 +59,7 @@ const Navbar = () => {
       });
     } catch (error) {
       console.error("Logout failed:", error);
-  
+
       Swal.fire({
         position: "center",
         icon: "error",
@@ -69,7 +69,6 @@ const Navbar = () => {
       });
     }
   };
-  
 
   const navLinks = (
     <ul className="md:flex xl:gap-10 md:gap-5 gap-2">
@@ -160,13 +159,21 @@ const Navbar = () => {
             <div className="flex items-center gap-3 ">
               <Link className="relative " to="/cart">
                 {" "}
-                <TbShoppingBag className="text-4xl" />
-                <span className="absolute right-0 -bottom-1 bg-secondary text-white px-1 text-sm rounded-full " > {cart?.length} </span>
+                <TbShoppingBag className="text-4xl font-light" />
+                <span className="absolute right-0 -bottom-1 bg-secondary text-white px-1 text-sm rounded-full ">
+                  {" "}
+                  {cart?.length}{" "}
+                </span>
               </Link>
               <span>
                 {user ? (
                   <div className="flex items-center gap-2">
-                    <img title={user?.email} src={account} alt="login user" />{" "}
+                    <img
+                      className="cursor-pointer"
+                      title={user?.email}
+                      src={account}
+                      alt="login user"
+                    />
                     <IoLogInOutline
                       onClick={handleLogOut}
                       title="Log out"

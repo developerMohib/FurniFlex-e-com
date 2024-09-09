@@ -121,7 +121,7 @@ const Home = () => {
     <Heading routeName={"Home"} />
     <div className="flex">
       {/* Category Menu */}
-      <div className="w-1/4 h-screen bg-gray-100 p-4 sticky top-0">
+      <div className="md:block hidden w-1/4 h-screen bg-gray-100 md:p-4 sticky top-0">
         <h2 className="text-xl font-bold mb-4">Categories</h2>
         <ul>
           {categoryArray.map((category, index) => (
@@ -137,8 +137,8 @@ const Home = () => {
       </div>
 
       {/* Product Display */}
-      <div className="w-3/4 p-4 overflow-y-scroll nos h-screen">
-        <div className="grid grid-cols-3 gap-6">
+      <div className="md:w-3/4 p-4 overflow-y-scroll nos h-screen">
+        <div className="md:grid grid-cols-3 gap-6">
           {/* Display filtered products if a category is selected, otherwise show all products */}
           {(filteredData.length > 0 ? filteredData : products)?.map(
             (item, idx) => (
