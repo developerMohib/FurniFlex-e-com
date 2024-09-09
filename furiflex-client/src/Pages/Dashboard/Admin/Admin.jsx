@@ -1,6 +1,23 @@
+import { Link } from "react-router-dom";
 import Heading from "../../../components/Heading/Heading";
+import useAuth from "../../../Hooks/useAuth";
 
 const Admin = () => {
+  const { user } = useAuth();
+  const email = user?.email;
+
+  const splitEmail = (email) => {
+    if (/\d/.test(email)) {
+      // jodi number take taile number dia kata
+      return email?.split(/\d+/);
+    } else {
+      // return split emain by @ sign
+      return email?.split("@");
+    }
+  };
+  const name = splitEmail(email);
+const longYear = new Date();
+const year = longYear.getFullYear();
   return (
     <>
       <Heading routeName={"Dashboard"} />
@@ -9,7 +26,7 @@ const Admin = () => {
           <div className="relative border-b border-white/20">
             <a className="flex items-center gap-4 py-6 px-8" href="#/">
               <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-white">
-                Material Tailwind Dashboard
+                {user && name[0]} Dashboard
               </h6>
             </a>
             <button
@@ -183,6 +200,27 @@ const Admin = () => {
                     </svg>
                     <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
                       sign up
+                    </p>
+                  </button>
+                </a>
+              </li>
+              <li>
+                <a className href="/">
+                  <button
+                    className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                    type="button"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      className="w-5 h-5 text-inherit"
+                    >
+                      <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z" />
+                    </svg>
+                    <p className="block antialiased font-sans text-base leading-relaxed text-green-500 font-medium capitalize">
+                      Go Home
                     </p>
                   </button>
                 </a>
@@ -677,7 +715,7 @@ const Admin = () => {
             <footer className="py-2">
               <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
                 <p className="block antialiased font-sans text-sm leading-normal font-normal text-inherit">
-                  © 2023, made with{" "}
+                  © {year}, made with{" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -689,27 +727,28 @@ const Admin = () => {
                   </svg>{" "}
                   by{" "}
                   <a
-                    href="https://www.creative-tim.com"
+                    href="https://devmohib.netlify.app"
                     target="_blank"
-                    className="transition-colors hover:text-blue-500"
+                    className="text-secondary hover:text-blue-500"
                   >
-                    Creative Tim
+                    Mohibullah Mohim
                   </a>{" "}
-                  for a better web.{" "}
+                  <Link to="/contact" >Contact{" "}</Link>
+                  for a better web.
                 </p>
                 <ul className="flex items-center gap-4">
                   <li>
-                    <a
-                      href="https://www.creative-tim.com"
+                    <Link
+                      href="/"
                       target="_blank"
                       className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500"
                     >
-                      Creative Tim
-                    </a>
+                     Home
+                    </Link>
                   </li>
                   <li>
                     <a
-                      href="https://www.creative-tim.com/presentation"
+                      href="https://devmohib.netlify.app/"
                       target="_blank"
                       className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500"
                     >
@@ -718,7 +757,7 @@ const Admin = () => {
                   </li>
                   <li>
                     <a
-                      href="https://www.creative-tim.com/blog"
+                      href="https://devmohib.netlify.app"
                       target="_blank"
                       className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500"
                     >
@@ -727,7 +766,7 @@ const Admin = () => {
                   </li>
                   <li>
                     <a
-                      href="https://www.creative-tim.com/license"
+                      href="https://devmohib.netlify.app"
                       target="_blank"
                       className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500"
                     >
