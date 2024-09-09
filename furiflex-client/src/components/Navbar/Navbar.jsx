@@ -122,6 +122,14 @@ const Navbar = () => {
           Blog
         </NavLink>
       </li>
+      <li>
+        <Link
+          className="hover:text-primary font-light"
+          to="dashboard"
+        >
+          Dashboard
+        </Link>
+      </li>
     </ul>
   );
 

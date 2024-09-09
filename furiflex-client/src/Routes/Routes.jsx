@@ -13,6 +13,7 @@ import PdDetails from "../Pages/PdDetails/PdDetails";
 import Cart from "../Pages/Cart/Cart";
 import PrivateRoutes from "./PrivateRoutes";
 import SingleProduct from "../components/SingleProduct/SingleProduct";
+import Admin from "../Pages/Dashboard/Admin/Admin";
 
 export const router = createBrowserRouter([
   {
@@ -62,5 +63,14 @@ export const router = createBrowserRouter([
   {
     path: "/sign-up",
     element: <SignUp />,
+  },
+  {
+    path: "/dashboard",
+    children: [
+      {
+        path: "",
+        element: <Admin />
+      }
+    ]
   },
 ]);
