@@ -10,6 +10,7 @@ import MyPagination from "../../components/MyPagination/MyPagination";
 import Heading from "../../components/Heading/Heading";
 import { motion } from "framer-motion";
 import Banner from "../../components/Banner/Banner";
+import Testominal from "../../components/Testominal/Testominal";
 
 const Home = () => {
   const { user } = useAuth();
@@ -207,6 +208,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Testominal />
     </>
   );
 };
