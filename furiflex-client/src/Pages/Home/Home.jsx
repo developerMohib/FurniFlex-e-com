@@ -11,6 +11,8 @@ import Heading from "../../components/Heading/Heading";
 import { motion } from "framer-motion";
 import Banner from "../../components/Banner/Banner";
 import Testominal from "../../components/Testominal/Testominal";
+import FAQ from "../../components/FAQ/FAQ";
+import Contact from "../../components/Contact/Contact";
 
 const Home = () => {
   const { user } = useAuth();
@@ -209,6 +211,8 @@ const Home = () => {
         </div>
       </div>
       <Testominal />
+      <FAQ />
+      <Contact />
     </>
   );
 };

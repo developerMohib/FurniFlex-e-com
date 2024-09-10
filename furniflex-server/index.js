@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
+const nodemailer = require("nodemailer");
 const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
@@ -21,6 +22,64 @@ const client = new MongoClient(uri, {
   },
 });
 
+// send message from contact
+
+const sendMail = (name, email, message) => {
+  // make a transporter
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // true for port 465, false for other ports
+    auth: {
+      user: process.env.ADMIN_EMAIL,
+      pass: process.env.ADMIN_PASS,
+    },
+  });
+
+  // make sure transporter correct . verify
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Server is ready to take our messages");
+    }
+  });
+
+  // mail option for user 
+  const mailOptUser = {
+    from: process.env.ADMIN_EMAIL,
+    to: email,
+    subject: 'Your inportant query is checking',
+    text: `Hello ${name} \n\nThank you for reaching out! We will get back to you soon.\n\nBest regards,\nFurni Flex e-commerce web application` ,
+  }
+
+  // mail option for admin
+ const mailOptAdmin = {
+    from: process.env.ADMIN_EMAIL,
+    to: email,
+    subject: `New Contact Form Submission from ${name}`,
+    text:`Name: ${name}\nEmail: ${email}\nMessage: ${message}` ,
+  }
+   // SEND EMAIL BY TRANSPORTER
+   transporter.sendMail(mailOptUser, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+
+   // SEND EMAIL BY TRANSPORTER
+   transporter.sendMail(mailOptAdmin, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+
+};
+
 async function run() {
   try {
     // connect database and collection
@@ -36,11 +95,11 @@ async function run() {
         const pageSize = 6;
         const skip = (page - 1) * pageSize;
 
-        const products = await productsCol.find()
-        .skip(skip)
-        .limit(pageSize)
-        .toArray();
-      
+        const products = await productsCol
+          .find()
+          .skip(skip)
+          .limit(pageSize)
+          .toArray();
 
         res.send(products);
       } catch (error) {
@@ -53,9 +112,9 @@ async function run() {
     });
 
     // signle products get
-    app.get('/product-details/:id', async (req, res) => {
+    app.get("/product-details/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: new ObjectId(id)};
+      const query = { _id: new ObjectId(id) };
       try {
         const result = await productsCol.findOne(query);
         if (result) {
@@ -64,11 +123,10 @@ async function run() {
           res.status(404).send({ message: "Product not found" });
         }
       } catch (error) {
-        console.error('Error fetching product:', error);
+        console.error("Error fetching product:", error);
         res.status(500).send({ message: "Internal Server Error" });
       }
     });
-    
 
     // carts collection data
     app.get("/carts", async (req, res) => {
@@ -125,6 +183,15 @@ async function run() {
         });
       }
     });
+
+    // contact from submission
+    app.post('/contact', async (req, res)=>{
+      const query = req.body ;
+      const name = query?.name;
+      const email = query?.email;
+      const message = query?.message ;
+      sendMail(name, email,message);
+    })
 
     // delete from cart
     app.delete("/carts/:id", async (req, res) => {
