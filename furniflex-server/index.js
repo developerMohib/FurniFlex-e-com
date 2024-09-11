@@ -23,7 +23,6 @@ const client = new MongoClient(uri, {
 });
 
 // send message from contact
-
 const sendMail = (name, email, message) => {
   // make a transporter
   const transporter = nodemailer.createTransport({
@@ -92,11 +91,16 @@ async function run() {
     app.get("/products", async (req, res) => {
       try {
         const page = parseInt(req.query.page) || 1;
+        const category = (req.query.category) ;
         const pageSize = 6;
         const skip = (page - 1) * pageSize;
-
+        let filter = {} ;
+        if(category && category !== "All" ) {
+          filter.category = category; 
+        }
+        
         const products = await productsCol
-          .find()
+          .find(filter)
           .skip(skip)
           .limit(pageSize)
           .toArray();

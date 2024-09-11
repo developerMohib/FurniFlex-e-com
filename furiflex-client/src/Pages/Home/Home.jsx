@@ -20,14 +20,13 @@ const Home = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const axiosPublic = useAxiosPublic();
-  const { products, isLoading } = useProducts(page);
-  const [filteredData, setFilteredData] = useState([]);
+  const [category, setCategory] = useState("All");
+  const { products, isLoading } = useProducts(page, category);
   const { cart, refetch: refetchCart } = useCartData();
 
   // Trigger any side-effects when `page` changes
   useEffect(() => {
-    // This effect will trigger a re-fetch in `useProducts`
-  }, [page]);
+  }, [page, category]);
 
   // Creating a unique list of categories
   const categoryArray = Array.from(
@@ -110,14 +109,7 @@ const Home = () => {
 
   // Function to handle category selection and filtering products
   const handleCategory = (category) => {
-    if (category === "All") {
-      // If "All" is clicked, set all products
-      setFilteredData(products);
-    } else {
-      // Otherwise, filter by category
-      const filterData = products?.filter((item) => item.category === category);
-      setFilteredData(filterData);
-    }
+    setCategory(category);
   };
 
   // Handle updating the page state
@@ -159,48 +151,43 @@ const Home = () => {
         <div className="md:w-3/4 p-4 overflow-y-scroll nos h-screen">
           <div className="md:grid grid-cols-3 gap-6">
             {/* Display filtered products if a category is selected, otherwise show all products */}
-            {(filteredData.length > 0 ? filteredData : products)?.map(
-              (item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="border p-4 rounded-lg shadow"
-                >
-                  <Link to={`/product-details/${item._id}`}>
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-40 object-cover mb-4 hover:scale-105 duration-300 transition-all"
-                    />
-                    <h3 className="text-base my-2 font-semibold">
-                      {item.name}
-                    </h3>
-                  </Link>
-                  <div className="flex justify-between items-center">
-                    <p className="text-xl font-bold text-red-500">
-                      €{item.price}
-                    </p>
-                    <p className="text-gray-600 line-through">
-                      €{item.original_price}
-                    </p>
-                    <p className="text-sm text-green-500">{item.discount}</p>
-                  </div>
-                  <p className="text-gray-400 text-sm my-2">
-                    {item.description}
+            {products?.map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="border p-4 rounded-lg shadow"
+              >
+                <Link to={`/product-details/${item._id}`}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-40 object-cover mb-4 hover:scale-105 duration-300 transition-all"
+                  />
+                  <small> Category : {item.category} </small>
+                  <h3 className="text-base my-2 font-semibold">{item.name}</h3>
+                </Link>
+                <div className="flex justify-between items-center">
+                  <p className="text-xl font-bold text-red-500">
+                    €{item.price}
                   </p>
-                  <button
-                    onClick={() =>
-                      handleAddCart(item._id, item.image, item.name, item.price)
-                    }
-                    className="mt-4 bg-black text-white py-2 px-4 w-full rounded"
-                  >
-                    Add to cart
-                  </button>
-                </motion.div>
-              )
-            )}
+                  <p className="text-gray-600 line-through">
+                    €{item.original_price}
+                  </p>
+                  <p className="text-sm text-green-500">{item.discount}</p>
+                </div>
+                <p className="text-gray-400 text-sm my-2">{item.description}</p>
+                <button
+                  onClick={() =>
+                    handleAddCart(item._id, item.image, item.name, item.price)
+                  }
+                  className="mt-4 bg-black text-white py-2 px-4 w-full rounded"
+                >
+                  Add to cart
+                </button>
+              </motion.div>
+            ))}
           </div>
           <div className="text-center my-10">
             <MyPagination
