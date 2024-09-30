@@ -7,7 +7,13 @@ const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 // middle-wares
-app.use(cors());
+const corsOptions = {
+  origin : ['http://localhost:5173', 'http://localhost:5174'],
+  credentials : true ,
+  optionsSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // MongoDB

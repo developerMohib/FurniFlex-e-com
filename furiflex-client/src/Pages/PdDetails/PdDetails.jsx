@@ -1,9 +1,9 @@
-import useCartData from "../../Hooks/useCartData";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Heading from "../../components/Heading/Heading";
+import useCartData from "../../Hooks/useCartData";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import Heading from "../../components/Heading/Heading";
 
 const PdDetails = () => {
   const product = useLoaderData();
@@ -23,14 +23,13 @@ const PdDetails = () => {
   const navigate = useNavigate();
 
   const email = user?.email;
-  const handleAddCart = (image, name, price) => {
+  const handleAddCart = (name, image, price) => {
     const cartItem = {
-      name,
-      image,
-      price,
+      name: name,
+      image: image,
+      price: price,
       email,
     };
-
     axiosPublic
       .post("/carts", cartItem)
       .then((res) => {
@@ -38,7 +37,7 @@ const PdDetails = () => {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: `${name} added to your cart`,
+            title: `${cartItem.name} added to your cart`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -120,7 +119,7 @@ const PdDetails = () => {
             </div>
 
             <button
-              onClick={() => handleAddCart()}
+              onClick={() => handleAddCart(name, image, price)}
               className="w-full bg-secondary text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300"
             >
               Add to Cart
