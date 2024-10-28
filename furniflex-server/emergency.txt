@@ -1,0 +1,5 @@
+DB_USER=furniflex
+DB_PASS=al4XjFPkPERCS450
+
+ADMIN_EMAIL='mohibullahmohim2020@gmail.com'
+ADMIN_PASS='febcxtwwjvoqvnlf'

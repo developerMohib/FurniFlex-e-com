@@ -1,0 +1,8 @@
+VITE_apiKey=AIzaSyDVBRUEy2QuCnU9JeCRdvFd46iOxpKBaGI
+VITE_authDomain=furniflex-4ed77.firebaseapp.com
+VITE_projectId=furniflex-4ed77
+VITE_storageBucket=furniflex-4ed77.appspot.com
+VITE_messagingSenderId=921351298045
+VITE_appId=1:921351298045:web:fc3534e447dda3705f5794
+
+VITE_BASE_URL=http://localhost:8000
